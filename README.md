@@ -1,7 +1,7 @@
 # Introduction to Machine Learning
 ## formerly known as Introduction to Pattern Recognition
 
-One of the goals of the course Introduction to Machine Learning was to do 5 projects. These 5 projects reflect the 5 sub-topics:
+As a part of a course Introduction to Machine Learning at the University of Erlangen-Nuremberg (FAU) we could have delivered 5 projects voluntarily. Therefore, I delivered these 5 projects based on the assignments reflecting 5 sub-topics:
 
 1. Fourier decomposition of a chirp signal
 2. Image preprocessing using Otsu thresholding
