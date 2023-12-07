@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 def calculate_R_Distance(Rx, Ry):
     '''
+    TO SHOW FOR CREASE INTENSITY
     calculate similarities of Ring features
     :param Rx: Ring features of Person X
     :param Ry: Ring features of Person Y
@@ -28,6 +29,7 @@ def calculate_R_Distance(Rx, Ry):
 
 def calculate_Theta_Distance(Thetax, Thetay):
     '''
+    TO SHOW FOR CREASE DIRECTION
     calculate similarities of Fan features
     :param Thetax: Fan features of Person X
     :param Thetay: Fan features of Person Y

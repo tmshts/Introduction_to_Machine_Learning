@@ -65,8 +65,8 @@ def mapping_array(cX_array):
         after_mapping_array[p] = ((cX_array[p] - min_value)/(1 - min_value)) * 255
     #print(after_mapping_array)
 
-    #plt.plot(after_mapping_array)
-    #plt.show()
+    plt.plot(after_mapping_array)
+    plt.show()
 
     return after_mapping_array
 

@@ -69,7 +69,7 @@ def extractRingFeatures(magnitude_spectrum, k, sampling_steps) -> np.ndarray:
         #param r: radius
             for j in range(sampling_steps):
                 theta = np.pi * j / (sampling_steps - 1)
-                for r in range(k * (i - 1), k * i +1):
+                for r in range(k * (i - 1), k * i + 1):
                     coordination = polarToKart((magnitude_spectrum.shape[0], magnitude_spectrum.shape[1]), r, theta)
                     rings[i - 1] += magnitude_spectrum[coordination]
     #print(rings)
@@ -93,14 +93,14 @@ def extractFanFeatures(magnitude_spectrum, k, sampling_steps) -> np.ndarray:
         #param theta: angle
         #param r: radius
             for j in range(sampling_steps):
-                theta = np.pi * j / (sampling_steps - 1)
-                for r in range(0, 64):
+                theta = i * j / (sampling_steps - 1)
+                for r in range(int(np.min(magnitude_spectrum.shape) / 2)):
                     coordination = polarToKart((magnitude_spectrum.shape[0], magnitude_spectrum.shape[1]), r, (theta*np.pi)/k)
                     fans[i - 1] += magnitude_spectrum[coordination]
     #print(fans)
     return fans
 
-def calcuateFourierParameters(img, k, sampling_steps) -> (np.ndarray, np.ndarray):
+def calcuateFourierParameters(img, k, sampling_steps):# -> (np.ndarray, np.ndarray):
     '''
     Extract Features in Fourier space following the paper.
     :param img: input image
@@ -126,6 +126,6 @@ if __name__ == '__main__':
     img3 = cv2.imread('Hand3.jpg', cv2.IMREAD_GRAYSCALE)
 
     magnitude_spectrum = calculateMagnitudeSpectrum(img1)
-    #plt.imshow(magnitude_spectrum)
-    #plt.show()
+    plt.imshow(magnitude_spectrum)
+    plt.show()
     rings = extractRingFeatures(magnitude_spectrum, 6, 10)

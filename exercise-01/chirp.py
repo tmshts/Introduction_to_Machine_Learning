@@ -1,25 +1,27 @@
+import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import pyplot as plt
 
-def createChirpSignal(samplingrate: int, duration: int, freqfrom: int, freqto: int, linear: bool):
+def createChirpSignal(samplingrate:int, duration:int, freqfrom:int, freqto:int, linear: bool=True):
     # returns the chirp signal as list or 1D-array
-    # TODO
-    if linear:
+    if linear == True:
+        c = (freqto - freqfrom) / duration
+        # linear space
         t = np.linspace(0, duration, samplingrate)
-        k = (freqto - freqfrom) / duration
-        y = np.sin(2 * np.pi * (freqfrom + k/2 * t) * t)
-        #integral of linear phase from 0 to t
-    else:
-        if (freqfrom == 0) or (freqto == 0) or (freqto * freqfrom < 0):
-            return None
-        else:
-            t = np.linspace(0, duration, samplingrate)
-            k = (freqto / freqfrom) ** (1 / duration)
-            y = np.sin(2 * np.pi * freqfrom / np.log(k) * (np.power(k, t) - 1))
-            #integral of exponential phase from 0 to t
-    plt.plot(t, y)
-    plt.ylabel('Amplitude')
-    plt.xlabel('Time')
-    plt.title('Chirp Signal')
-    plt.show()
-    return y
+        # formula for linear frequency chirp
+        chirp = np.sin(2 * np.pi * ((c * t**2) / 2 + (freqfrom * t)))
+        #plt.plot(t, chirp)
+        #plt.grid(True, which="both")
+        #plt.title("Linear Frequency Chirp")
+        #plt.xlabel('t (sec)')
+        #plt.show()
+    else: # linear == False:
+        k = (freqto / freqfrom)**(1/duration)
+        # exponential space
+        t = np.linspace(0, duration, samplingrate) # np.logspace
+        # formula for exponential frequency chirp
+        chirp = np.sin(2 * np.pi * freqfrom * (((k**t) - 1)/np.log(k)))
+        #plt.plot(t, chirp)
+        #plt.title("Exponential Frequency Chirp")
+        #plt.xlabel('t (sec)')
+        #plt.show()
+    return chirp

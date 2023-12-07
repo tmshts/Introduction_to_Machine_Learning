@@ -1,48 +1,47 @@
+import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import pyplot as plt
+from math import pi
 
-
+# samples = 200, frequency = 2, kMax = 10000, [amplitude = 1])
 def createTriangleSignal(samples: int, frequency: int, k_max: int):
-    # returns the signal as 1D-array or list
-    # TODO
-    t = np.linspace(0, 1, samples)
-    z = 0
-    for k in range(0, k_max + 1):
-        z += (8 / (np.pi ** 2)) * ((-1)**k) * (np.sin(2 * np.pi * (2*k + 1) * frequency * t) / ((2*k + 1) ** 2))
-    plt.plot(t, z)
-    plt.ylabel('Amplitude')
-    plt.xlabel('Time')
-    plt.title('Triangle Signal')
-    plt.show()
-    return z
-
+    # returns the signal as 1D-array (np.ndarray)
+    # linspace(start, stop, number)
+    t = np.linspace(0, frequency, num=samples)
+    trian = 0
+    for k in range(0, k_max - 1):
+        trian += (8 / (pi ** 2)) * ((-1)**k) * ((np.sin(2*pi*(2*k + 1)* t))/((2*k + 1)**2))
+    #plt.plot(t, trian)
+    #plt.grid(True, which="both")
+    #plt.title("Triangle Signal")
+    #plt.xlabel('Time t (sec)')
+    #plt.ylabel('Amplitude')
+    #plt.show()
+    return trian
 
 def createSquareSignal(samples: int, frequency: int, k_max: int):
-    # returns the signal as 1D-array or list
-    # TODO
-    t = np.linspace(0, 1, samples)
-    z = 0
-    for k in range(1, k_max + 1):
-        z += (4 / np.pi) * (np.sin(2 * np.pi * (2*k - 1) * frequency * t) / (2*k - 1))
-    plt.plot(t, z)
-    plt.ylabel('Amplitude')
-    plt.xlabel('Time')
-    plt.title('Square Signal')
-    plt.show()
-    return z
-
+    # returns the signal as 1D-array (np.ndarray)
+    t = np.linspace(0, frequency, num=samples)
+    squa = 0
+    for k in range(1, k_max):
+        squa += (4 / pi) * ((np.sin(2*pi*(2*k - 1)*t))/((2*k) - 1))
+    #plt.plot(t, squa)
+    #plt.grid(True, which="both")
+    #plt.title("Square Signal")
+    #plt.xlabel('Time t (sec)')
+    #plt.ylabel('Amplitude')
+    #plt.show()
+    return squa
 
 def createSawtoothSignal(samples: int, frequency: int, k_max: int, amplitude: int):
-    # returns the signal as 1D-array or list
-    # TODO
-    t = np.linspace(0, 1, samples)
-    A = amplitude
-    z = (A / 2)
+    # returns the signal as 1D-array (np.ndarray)
+    t = np.linspace(0, frequency, num=samples)
+    saw = (amplitude/2)
     for k in range(1, k_max + 1):
-        z -= (A / np.pi) * (np.sin(2 * np.pi * k * frequency * t) / k)
-    plt.plot(t, z)
-    plt.ylabel('Amplitude')
-    plt.xlabel('Time')
-    plt.title('Sawtooth Signal')
-    plt.show()
-    return z
+        saw -= (amplitude/pi) * (np.sin(2*pi*k*t)/k)
+    #plt.plot(t, saw)
+    #plt.grid(True, which="both")
+    #plt.title("Saw tooth Signal")
+    #plt.xlabel('Time t (sec)')
+    #plt.ylabel('Amplitude = sin(time)')
+    #plt.show()
+    return saw

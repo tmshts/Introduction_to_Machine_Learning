@@ -6,9 +6,19 @@ Modified on 05.12.2020
 '''
 import cv2
 import matplotlib.pyplot as plt
-from otsu import otsu
+from otsu import binarize_threshold, calculate_otsu_threshold, create_greyscale_histogram, mu_helper, otsu, p_helper
 
 img = cv2.imread('contrast.jpg', cv2.IMREAD_GRAYSCALE)
+
+#create_greyscale_histogram(img)
+#binarize_threshold(img, 180)
+#p0 = p_helper(create_greyscale_histogram(img), 127)[0]
+#print("p0 is: ", p0)
+#p1 = p_helper(create_greyscale_histogram(img), 127)[1]
+#print("p1 is: ", p1)
+#first = mu_helper(create_greyscale_histogram(img), 124, 0.33, 0.66)[0]
+#print("the first ist: ", first)
+#calculate_otsu_threshold(create_greyscale_histogram(img))
 
 res = otsu(img)
 

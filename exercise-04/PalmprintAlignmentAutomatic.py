@@ -186,17 +186,14 @@ def findKPoints(img, y1, x1, y2, x2) -> tuple:
     # measure the angle it makes with a horizontal line
     direction_vector = (y2 - y1) / (x2 - x1)
 
-    # I do not understand ??
     difference = y1 - (direction_vector * x1)
     # x_value increase by 1
     x = 0
 
     # starting point
-    # I do not understand ??
     #y = (direction_vector * x) + difference
 
     while True:
-        # I do not understand ??
         y = int((direction_vector * x) + difference)
         if img[y, x] == 255:
             break
@@ -232,7 +229,6 @@ def getCoordinateTransform(k1, k2, k3) -> np.ndarray:
     #y2 = (direction_vector_k2 * x) + difference_k2
     #y2 = int(y2) 
 
-    # I do not understand ??
     factor = np.inf
 
     while True:
@@ -241,9 +237,8 @@ def getCoordinateTransform(k1, k2, k3) -> np.ndarray:
         y2 = (direction_vector_k2 * x) + difference_k2
         y2 = int(y2)
 
-        # I do not understand ??     
         difference_y = y1 - y2
-        if factor < np.abs(difference_y):
+        if factor <= np.abs(difference_y):
             break
         # moving from 0 column to the right step 1
         x = x + 1
@@ -254,7 +249,6 @@ def getCoordinateTransform(k1, k2, k3) -> np.ndarray:
     # deltaX = k3[1] - k1[1]
     # radians = math.atan2(deltaY, deltaX)
     # angle = radians * (180/math.pi)
-    # Set scale to 1 when computing the transform ????????
     
     center = (y1, x)
     # calculate radians
@@ -311,8 +305,8 @@ def palmPrintAlignment(img):
     # rotate the image around new origin
     # Rotated palm must have the same dimensions as input
     final_image = cv2.warpAffine(img, rotated_matrix, (img.shape[1], img.shape[0]))
-    #plt.imshow(final_image)
-    #plt.show()
+    plt.imshow(final_image)
+    plt.show()
 
     return final_image
 
@@ -320,12 +314,12 @@ if __name__ == '__main__':
     img1 = cv2.imread('Hand1.jpg', cv2.IMREAD_GRAYSCALE)
     img2 = cv2.imread('Hand2.jpg', cv2.IMREAD_GRAYSCALE)
     img3 = cv2.imread('Hand3.jpg', cv2.IMREAD_GRAYSCALE)
-    #drawCircle(img, 5, 7)
-    #binarizeAndSmooth(img)
-    #contour_img = drawLargestContour(img)
-    #getFingerContourIntersections(contour_img, 5)
-    #findKPoints(contour_img, 5, 24, 15, 4,)
+    draw = drawCircle(img1, 5, 7)
+    bin_img = binarizeAndSmooth(img1)
+    contour_img = drawLargestContour(bin_img)
+    getFingerContourIntersections(contour_img, 5)
+    findKPoints(contour_img, 5, 24, 15, 4,)
     #print(np.inf)
 
     #print(np.inf)
-    #palmPrintAlignment(img1)
+    palmPrintAlignment(img1)

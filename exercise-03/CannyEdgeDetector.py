@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import convolve
 import math
-from PIL import Image
+from PIL import Image, ImageOps
 
 #
 # NO MORE MODULES ALLOWED
@@ -250,7 +250,7 @@ def convertAngle(angle):
 def maxSuppress(g, theta):
     """
     calculate maximum suppression
-    :param g:  (np.ndarray)
+    :param g:  (np.ndarray) g = magnitude
     :param theta: 2d image (np.ndarray)
     :return: max_sup (np.ndarray)
     """
@@ -396,10 +396,13 @@ def canny(img):
     plt.show()
 
     result = hysteris(maxS_img, 50, 75)
+    plt.imshow(result, 'gray')
+    plt.show()   
 
     return result
 
 if __name__ == '__main__':
+    """
     img = np.array([[1, 2, 3, 6, 8], [6, 5, 4, 5, 6], [1, 1, 7, 45, 100], [2, 4, 1, 1, 5], [1, 9, 9, 1, 5], [1, 1, 7, 6, 5], [1, 1, 3, 2, 5]])
     print("2D array picture:")
     print(img)
@@ -429,8 +432,19 @@ if __name__ == '__main__':
     result = hysteris(maxS_img, 50, 75)
     print("Result:")
     print(result)
+    """
 
-    image = np.array(Image.open('contrast.jpg'))
-    print("Shape of image:")
-    print(image.shape)
-    result = canny(image)
+    im = np.array(Image.open('contrast.jpg'))
+
+    R = im[:,:,0]
+    G = im[:,:,1]
+    B = im[:,:,2]
+
+    #add = R + G + B
+
+    result = canny(R)
+
+    #result = canny(R)
+    #result = canny(G)
+    #result = canny(B)
+

@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 #
 # NO OTHER IMPORTS ALLOWED
 #
@@ -147,6 +149,8 @@ def calculate_otsu_threshold(hist):
     #for i in range(0, len(histogram_prob)):
     #    prob += histogram_prob[i]
     #print(prob)
+    print(histogram_prob)
+
 
     # TODO loop through all possible thetas
     for theta in range(0, len(histogram_prob)):
@@ -168,7 +172,7 @@ def calculate_otsu_threshold(hist):
         #else:
         #    class_variance_max = class_variance_max
     threshold = np.argmax(class_variance_array)
-    #print(threshold)
+    print(threshold)
     return threshold
 
 

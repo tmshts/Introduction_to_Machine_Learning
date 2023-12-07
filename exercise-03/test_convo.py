@@ -25,7 +25,7 @@ class TestConvo(unittest.TestCase):
 
     def test_type(self):
         a = np.zeros((10, 10))
-        b = np.zeros((3, 3))
+        b = np.zeros((3,3))
         res = slow_convolve(a, b)
         self.assertIsInstance(res, np.ndarray, msg="use numpy arrays")
 
@@ -34,22 +34,23 @@ class TestConvo(unittest.TestCase):
             for s1 in (1, 2, 3):
                 for s2 in (1, 2, 3):
                     a = np.zeros((s0, s0))
-                    b = np.zeros((s1, s2))
+                    b = np.zeros((s1,s2))
                     res = slow_convolve(a, b)
-                    self.assertEqual(res.shape, (s0, s0), msg='check the padding')
+                    self.assertEqual(res.shape, (s0,s0), msg='check the padding')
 
     def test_flip(self):
-        a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-        b = np.array([[1, 0, 0], [0, 0, 0], [0, 0, 0]])
-        res = slow_convolve(a, b)
-        self.assertEqual(res[0, 0], 5, msg='did you forget to flip the kernel horizontally and vertically?')
+        a = np.array([[1,2,3], [4,5,6], [7,8,9]])
+        b = np.array([[1,0,0], [0,0,0], [0,0,0]])
+        res = slow_convolve(a,b)
+        self.assertEqual(res[0,0], 5, msg='did you forget to flip the kernel horizontally and vertically?')
+        
 
     def test_sum(self):
-        a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        a = np.array([[1,2,3], [4,5,6], [7,8,9]])
         b = np.array([[2]])
         res = slow_convolve(a, b).sum()
         self.assertEqual(res, 90, msg='check the element-wise operation (multiplication)')
-        b = np.array([[1, 1], [2, 2], [3, 3]])
+        b = np.array([[1,1], [2,2], [3,3]])
         res = slow_convolve(a, b).sum()
         self.assertEqual(res, 306, msg='check the aggregation operation (addition)')
 
@@ -58,10 +59,9 @@ class TestConvo(unittest.TestCase):
         b = np.random.rand(3, 3)
         res1 = slow_convolve(a, b)
         res2 = convolve(a, b, mode='same')
-        diff = np.abs(res1 - res2).sum()
-        self.assertTrue(diff <= RTOL,
-                        msg='you do not get the same result as scipy.signal.convolve, so there is some error')
-
-
+        diff = np.abs(res1-res2).sum()
+        self.assertTrue(diff <= RTOL, msg='you do not get the same result as scipy.signal.convolve, so there is some error')
+        
+    
 if __name__ == '__main__':
     unittest.main()
